@@ -31,7 +31,7 @@
                     <tbody>
                     <tr>
                         <td><?= ucfirst($userInfo['name']); ?></td>
-                        <td><?= $userInfo['email']; ?></td>
+                        <td><?= $userInfo['pak_number']; ?></td>
                         <td><a href="<?= site_url('auth/logout'); ?>">Logout</a></td>
                     </tr>
                     </tbody>
