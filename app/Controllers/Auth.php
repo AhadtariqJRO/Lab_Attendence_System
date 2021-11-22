@@ -28,7 +28,8 @@ class Auth extends Controller{
 
         // ]);
 
-
+//    echo 'test';
+//    die;
         //Creating custom validation
         $validation = $this->validate([
             'name'=>[
@@ -37,7 +38,7 @@ class Auth extends Controller{
                     'required'=>'Your full name is required'
                 ]
                 ],
-            'Pak_Number'=>[
+            'pak_number'=>[
                 'rules'=>'required|integer|min_length[5]|max_length[8]',
                 'errors'=>[
                     'required'=>'Pak Number is required',
@@ -70,22 +71,32 @@ class Auth extends Controller{
         }else{
             //Registering users into Database
             $name = $this->request->getPost('name');
-            $pnumber = $this->request->getPost('Pak_Number');
+            $pnumber = $this->request->getPost('pak_number');
+            $designation = $this->request->getPost('designation');
             $password = $this->request->getPost('password');
 
             $values = [
                 'name'=>$name,
-                'Pak_Number'=>$pnumber,
+                'pak_number'=>$pnumber,
+                'designation'=>$designation,
                 'password'=>Hash::make($password),
             ];
+
             $usersModel = new \App\Models\UsersModel();
+            $count = $usersModel->countAll();
             //For debugging purpose
-            //print_r($values);
-            //die;
+           // print_r("checked");die;
+            //print_r($password);die;
+//            print_r($values);
+//            die;
             $query = $usersModel->insert($values, true);
+//            print_r($query);
+//            die;
             if(!$query){
+//                print_r($values);die;
                 return redirect()->back()->with('fail', 'Something went wrong');
             }else{
+//                print_r($values);die;
                 return redirect()->to('auth')->with('success', 'You are now registered successfully');
 
                 //if we want to redirect user direct to dashboard after sign Up
@@ -93,6 +104,8 @@ class Auth extends Controller{
                 //session()->set('loggedUser', $last_id);
                 //return redirect()->to('/dashboard');
             }
+//            print_r($values);
+//            die;
         }
 
 
@@ -103,12 +116,12 @@ class Auth extends Controller{
 
         //Lets start validation
         $validation = $this->validate([
-            'Pak_Number'=>[
-                'rules'=>'required|integer|is_not_unique[users.Pak_Number]|min_length[]|max_length[8]',
+            'pak_number'=>[
+                'rules'=>'required|integer|is_not_unique[users.pak_number]|min_length[5]|max_length[8]',
                 'errors'=>[
                     'required'=>'Pak Number is required',
                     'integer'=> 'Enter a valid Pak Number',
-                    'is_not_unique'=>'This email is not registered on our service',
+                    'is_not_unique'=>'This Pak_Number is not registered on our service',
                     'min_length'=>'Password must have atleast 5 digits in length',
                     'max_length'=>'Password must not have more than 8 digits in length'
                     ]
@@ -130,12 +143,14 @@ class Auth extends Controller{
 
             //Lets check user
 
-            $pnumber  = $this->request->getPost('Pak_Number');
+            $pnumber  = $this->request->getPost('pak_number');
             $password = $this->request->getPost('password');
             $usersModel = new \App\Models\UsersModel();
-            $user_info = $usersModel->where('Pak_Number', $pnumber)->first();
+            $user_info = $usersModel->where('pak_number', $pnumber)->first();
             $check_password = Hash::check($password, $user_info['password']);
 
+//            print_r($user_info);
+//            die;
             if(!$check_password){
                 session()->setFlashdata('fail', 'Incorrect password');
                 return redirect()->to('/auth')->withInput();

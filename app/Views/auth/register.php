@@ -36,16 +36,16 @@
                             </div>
                             <div class="form-group">
                                 <label for="">Pak Number</label>
-                                <input type="number" class="form-control" name="Pak_Number" placeholder="Enter your Pak Number" value="<?= set_value('Pak_Number') ?>">
-                                <span class="text-danger"><?= isset($validation) ? display_error($validation, 'Pak_Number') : '' ?></span>
+                                <input type="number" class="form-control" name="pak_number" placeholder="Enter your Pak Number" value="<?= set_value('Pak_Number') ?>">
+                                <span class="text-danger"><?= isset($validation) ? display_error($validation, 'pak_number') : '' ?></span>
                             </div>
                             <div class="form-group mb-4">
                                 <label class="form-label" for="">Designation</label><br>
                                 <select id="rank" name="designation" style="height: 50px ; width: 100% ; border-radius: 2px">
-                                    <option value="1">D1</option>
-                                    <option value="2">D2</option>
-                                    <option value="3">D3</option>
-                                    <option value="4">D4</option>
+                                    <option value="D1">D1</option>
+                                    <option value="D2">D2</option>
+                                    <option value="D3">D3</option>
+                                    <option value="D4">D4</option>
                                 </select>
                             </div>
                             <div class="form-group">

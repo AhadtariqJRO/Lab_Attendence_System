@@ -25,7 +25,7 @@
                     <?php
                     $loggedUserID = session()->get('loggedUser');
 
-                    if ($loggedUserID == '12'):?>
+                    if ($loggedUserID == '14'):?>
                     <h1>Hi Admin</h1>
                     <?php endif; ?>
                     <tbody>
