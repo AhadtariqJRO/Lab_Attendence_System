@@ -27,6 +27,9 @@
 
                             <h2 class="mb-5 text-center">CEA <br> Attendence System</h2>
 
+
+
+
                             <hr class="my-4">
                             <h4>Sign Up</h4><hr>
                             <div class="form-group">
