@@ -8,6 +8,17 @@ use App\Models\UsersModel;
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
 </head>
 </html>
 <body>
@@ -28,48 +39,104 @@ use App\Models\UsersModel;
                     </a>
                 </div>
             </div>
-            <table class="table table-striped table-dark">
-                <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Name</th>
-                    <th>Designation</th>
-                    <th>Pak-Number</th>
-                    <th>Present</th>
-                    <th>Absent</th>
-                    <th>Leave</th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php
-                if (!empty($users)){
-                    $i = 1;
-                    foreach ($users as $k):?>
-                        <tr>
-                            <td scope="row"><?php echo $i++; ?></td>
-                            <td><?php echo $k['name']; ?></td>
-                            <td><?php echo $k['designation']; ?></td>
-                            <td><?php echo $k['pak_number']; ?></td>
-                            <td>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                    <label class="form-check-label" for="flexCheckDefault">
-                                    </label>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                    <label class="form-check-label" for="flexCheckDefault">
-                                    </label>
-                                </div>
-                            </td>
-                            <td><a class="btn btn-success " data-toggle="modal" data-target="#leave" id="addLeave">Leave</a></td>
-                        </tr>
-                    <?php endforeach;
-                } ?>
-                </tbody>
-            </table>
+            <form action="<?php echo site_url('Listing/dataInserting')?>" method="POST">
+                <table class="table table-striped table-dark">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Designation</th>
+                        <th>Pak-Number</th>
+                        <th>Present</th>
+                        <th>Absent</th>
+                        <th>Leave</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                    if (!empty($users)){
+                        $i = 1;
+                        foreach ($users as $k):?>
+                            <tr>
+                                <td scope="row"><?php echo $i++; ?></td>
+                                <td><?php echo $k['name']; ?></td>
+                                <td><?php echo $k['designation']; ?></td>
+                                <td><?php echo $k['pak_number']; ?></td>
+                                <td>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" name="group<?php echo $i?>[]" checked>
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                        </label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" name="group<?php echo $i?>[]">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                        </label>
+                                    </div>
+                                </td>
+                                <td><a class="btn btn-success " data-toggle="modal" data-target="#leave" id="addLeave">Leave</a></td>
+                            </tr>
+                            <div>
+                                <input hidden="hidden" name="pak_number[]" value="<?php echo $k['pak_number']?>">
+                            </div>
+                        <?php endforeach;
+                    } ?>
+                    </tbody>
+                </table>
+
+                <div class="text-center">
+                    <div class="form-group">
+                        <button class="btn btn-primary btn-block" type="submit">Save Attendance Record</button>
+                    </div>
+                </div>
+            </form>
+            <form action="<?php echo site_url('Listing/dataInserting')?>" method="POST">
+                <table class="table table-striped table-dark">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Designation</th>
+                        <th>Pak-Number</th>
+                        <th>Present</th>
+                        <th>Absent</th>
+                        <th>Leave</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                    if (!empty($users)){
+                        $i = 1;
+                        foreach ($users as $k):?>
+                            <tr>
+                                <td scope="row"><?php echo $i++; ?></td>
+                                <td><?php echo $k['name']; ?></td>
+                                <td><?php echo $k['designation']; ?></td>
+                                <td><?php echo $k['pak_number']; ?></td>
+                                <td><a class="btn btn-success " data-toggle="modal" data-target="#leave" id="addPresent">Present</a></td>
+
+                                <td><a class="btn btn-danger " data-toggle="modal" data-target="#leave" id="addAbsent">Absent</a></td>
+
+                                <td><a class="btn btn-warning " data-toggle="modal" data-target="#leave" id="addLeave">Leave</a></td>
+                            </tr>
+                            <div>
+                                <input hidden="hidden" name="pak_number[]" value="<?php echo $k['pak_number']?>">
+                            </div>
+                        <?php endforeach;
+                    } ?>
+                    </tbody>
+                </table>
+
+                <div class="text-center">
+                    <div class="form-group">
+                        <button class="btn btn-primary btn-block" type="submit">Save Attendance Record</button>
+                    </div>
+                </div>
+            </form>
+
+
         </div>
     </div>
 </div>
@@ -85,11 +152,11 @@ use App\Models\UsersModel;
                         </div>
                         <div class="modal-body">
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked>
                                 <label class="form-check-label" for="inlineRadio1">Medical Leave</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" >
                                 <label class="form-check-label" for="inlineRadio2">Casual Leave</label>
                             </div>
                         </div>
@@ -110,22 +177,47 @@ use App\Models\UsersModel;
     </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-        crossorigin="anonymous"></script>
 
 
 
 <!--This script has been written so that only one checkbox is selected from absent or present column-->
+<!--<script>-->
+<!--    $(document).ready(function(){-->
+<!--        $('input:checkbox').click(function() {-->
+<!--            $('input:checkbox').not(this).prop('checked', false);-->
+<!--        });-->
+<!--    });-->
+<!--</script>-->
+<!---->
+<!---->
+<!--<div >-->
+<!--    <input type="checkbox" name="group4[]" />-->
+<!--</div>-->
+<!--<div >-->
+<!--    <input type="checkbox" name="group5[]" />-->
+<!--</div>-->
+<!--<input type="checkbox" name="group1[]" />-->
+<!--<input type="checkbox" name="group1[]" />-->
+<!--<input type="checkbox" name="group1[]" />-->
+<!---->
+<!--<input type="checkbox" name="group2[]" />-->
+<!--<input type="checkbox" name="group2[]" />-->
+<!--<input type="checkbox" name="group2[]" />-->
+<!---->
+<!--<input type="checkbox" name="group3[]" />-->
+<!--<input type="checkbox" name="group3[]" />-->
+<!--This script has been written so that only one checkbox is selected from absent or present column-->
 <script>
-    $(document).ready(function(){
-        $('input:checkbox').click(function() {
-            $('input:checkbox').not(this).prop('checked', false);
-        });
+    $('input[type="checkbox"]').on('change', function() {
+        $('input[name="' + this.name + '"]').not(this).prop('checked', false);
     });
 </script>
+<!--<script>-->
+<!--    document.getElementById("addPresent").onclick = function() {-->
+<!--        //disable-->
+<!--        this.disabled = true;-->
+<!---->
+<!--        //do some validation stuff-->
+<!--    }-->
+<!--</script>-->
+

@@ -5,6 +5,7 @@ namespace App\Controllers;
 
 
 use App\Models\AttendanceModel;
+use App\Models\DattendanceModel;
 use App\Models\MAttendanceModel;
 use App\Models\UsersModel;
 
@@ -34,5 +35,21 @@ class Listing extends BaseController
         $data['users'] = $record->findAll();
 //        print_r($data);die;
         return view('record/markAttendance', $data);
+    }
+
+    function dataInserting(){
+        $record = new DattendanceModel();
+        $users = new UsersModel();
+        $data['users'] = $users->findAll();
+        print_r($data);
+        die;
+        print_r($_POST);
+//        $pak_number = [
+//          "pak_number" =>   $this->request->getVar('pak_number')
+//
+//        ];
+//        print_r($pak_number);
+        die;
+
     }
 }
