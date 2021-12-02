@@ -35,6 +35,7 @@ class Listing extends BaseController
         $data['users'] = $record->findAll();
 //        print_r($data);die;
         return view('record/markAttendance', $data);
+//        return view('record/test', $data);
     }
 
     function dataInserting(){
@@ -51,5 +52,22 @@ class Listing extends BaseController
 //        print_r($pak_number);
         die;
 
+    }
+
+    function insertingAttendance(){
+
+        $record = new DattendanceModel();
+        $users = new UsersModel();
+        $data['users'] = $users->select('pak_number')->findAll();
+//        $record['dailyAttendance'] = $data['users'];
+        $pakn = array_shift($data['users']);
+        print_r($pakn);die;
+        print_r($data['users']['0']['pak_number']);die;
+//        $query = $record->insert($data['users'],true);
+
+        print_r($query);die;
+//        print_r($record);
+        print_r($data);
+        die;
     }
 }
